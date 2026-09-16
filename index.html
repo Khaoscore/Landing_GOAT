@@ -1,0 +1,1274 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>STEP Impact + AI Readiness Assessment | GOAT DATA</title>
+  <meta name="description" content="A free diagnostic of how you're using STEP today: your master data model, your potential to apply AI, and where your roadmap should go next to capture more ROI. Free for Stibo Connect attendees.">
+  <meta name="theme-color" content="#003E71">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free STEP Impact + AI Readiness Assessment | GOAT DATA">
+  <meta property="og:description" content="Free for Stibo Connect attendees. Pick your focus area: Master Data, Applied AI, Roadmap or ROI.">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* Goat brand palette */
+      --red: #FF183A;
+      --red-hover: #E60D2E;
+      --red-text: #C8102E;
+      --navy: #003E71;
+      --navy-900: #00284C;
+      --navy-950: #001A33;
+      --teal: #00959C;
+      --teal-700: #007379;
+      --teal-300: #6ECDCF;
+      --teal-50: #EAF6F6;
+      --gray: #E8E8E8;
+
+      --ink: #0E2339;
+      --muted: #52667A;
+      --line: #D6DEE6;
+      --line-strong: #B7C4D1;
+      --surface: #F3F6F9;
+
+      --band-overhang: 56px;
+      --shadow-card: 0 1px 2px rgba(0, 26, 51, .06), 0 28px 64px -24px rgba(0, 26, 51, .45);
+      --font: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      color: var(--ink);
+      background: var(--surface);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; }
+    button, input { font: inherit; }
+    [hidden] { display: none !important; }
+
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+    }
+
+    /* ---------- Page grid ---------- */
+    .page { position: relative; z-index: 0; overflow-x: hidden; }
+    @supports (overflow-x: clip) { .page { overflow-x: clip; } }
+
+    .layout {
+      display: grid;
+      grid-template-columns:
+        [full-start] minmax(16px, 1fr)
+        [content-start] minmax(0, 640px)
+        [content-end] minmax(16px, 1fr)
+        [full-end];
+    }
+    .band        { grid-column: full;    grid-row: 1 / 3; }
+    .site-header { grid-column: content; grid-row: 1; }
+    .hero        { grid-column: content; grid-row: 2; }
+    .form-col    { grid-column: content; grid-row: 3; }
+    .details     { grid-column: content; grid-row: 4; }
+    .why         { grid-column: content; grid-row: 5; }
+
+    @media (min-width: 1024px) {
+      :root { --band-overhang: 0px; }
+      .layout {
+        grid-template-columns:
+          [full-start] minmax(32px, 1fr)
+          [content-start main-start] minmax(0, 640px)
+          [main-end] 64px
+          [aside-start] minmax(420px, 480px)
+          [aside-end content-end] minmax(32px, 1fr)
+          [full-end];
+        grid-template-rows: auto auto 1fr;
+      }
+      .hero     { grid-column: main; }
+      .form-col { grid-column: aside; grid-row: 2 / 4; }
+      .details  { grid-column: main; grid-row: 3; }
+      .why      { grid-column: content; grid-row: 4; }
+    }
+
+    /* ---------- Navy band ---------- */
+    .band { position: relative; pointer-events: none; }
+    .band::before,
+    .band::after {
+      content: "";
+      position: absolute;
+      inset: 0 0 calc(-1 * var(--band-overhang)) 0;
+    }
+    .band::before {
+      background:
+        radial-gradient(55% 85% at 90% -5%, rgba(0, 149, 156, .55) 0%, rgba(0, 149, 156, 0) 62%),
+        radial-gradient(45% 60% at -5% 105%, rgba(110, 205, 207, .16) 0%, rgba(110, 205, 207, 0) 70%),
+        linear-gradient(160deg, var(--navy) 0%, var(--navy-900) 65%, var(--navy-950) 100%);
+    }
+    .band::after {
+      background-image: radial-gradient(rgba(255, 255, 255, .11) 1px, transparent 1.3px);
+      background-size: 24px 24px;
+      -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 80%);
+              mask-image: linear-gradient(180deg, #000 0%, transparent 80%);
+    }
+    .band__net {
+      position: absolute;
+      z-index: 1;
+      top: 56px;
+      right: -170px;
+      width: 520px;
+      opacity: .32;
+      -webkit-mask-image: linear-gradient(to left, #000 45%, transparent 95%);
+              mask-image: linear-gradient(to left, #000 45%, transparent 95%);
+    }
+    @media (min-width: 1024px) {
+      .band__net { top: 0; right: 0; width: 46vw; max-width: 760px; opacity: .55; }
+    }
+    .pulse {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: pulse 3.2s ease-out infinite;
+    }
+    .pulse--late { animation-delay: 1.6s; }
+    @keyframes pulse {
+      0%   { transform: scale(.6); opacity: .9; }
+      100% { transform: scale(2.4); opacity: 0; }
+    }
+
+    /* ---------- Header ---------- */
+    .site-header {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px 0 8px;
+    }
+    @media (min-width: 1024px) { .site-header { padding-top: 28px; } }
+    .logo { display: inline-flex; border-radius: 6px; }
+    .logo img { height: 28px; width: auto; }
+    @media (min-width: 768px) { .logo img { height: 32px; } }
+    .logo:focus-visible { outline: 2px solid var(--teal-300); outline-offset: 4px; }
+
+    .partner {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, .18);
+      background: rgba(255, 255, 255, .06);
+      color: rgba(255, 255, 255, .88);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .02em;
+      white-space: nowrap;
+    }
+    .partner::before {
+      content: "";
+      width: 7px; height: 7px;
+      background: var(--teal-300);
+      transform: rotate(45deg);
+      border-radius: 1.5px;
+    }
+    @media (min-width: 480px) { .partner { font-size: 12px; } }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      position: relative;
+      z-index: 2;
+      color: #fff;
+      padding: 28px 0 36px;
+    }
+    @media (min-width: 1024px) { .hero { padding: 56px 0 80px; } }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 14px 7px 10px;
+      border-radius: 999px;
+      background: rgba(110, 205, 207, .12);
+      border: 1px solid rgba(110, 205, 207, .35);
+      color: var(--teal-300);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    @media (min-width: 480px) { .eyebrow { font-size: 12px; } }
+    .live-dot { position: relative; width: 8px; height: 8px; flex: none; }
+    .live-dot::before,
+    .live-dot::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: var(--red);
+    }
+    .live-dot::after { animation: ping 2s ease-out infinite; }
+    @keyframes ping {
+      0%   { transform: scale(1); opacity: .7; }
+      100% { transform: scale(2.8); opacity: 0; }
+    }
+
+    .hero h1 {
+      margin: 20px 0 18px;
+      font-size: clamp(2.125rem, 1.35rem + 3.3vw, 3.5rem);
+      line-height: 1.06;
+      font-weight: 800;
+      letter-spacing: -.025em;
+      text-wrap: balance;
+    }
+    .hero h1 .accent { color: var(--teal-300); }
+
+    .lead {
+      margin: 0;
+      text-wrap: pretty;
+      max-width: 36em;
+      font-size: clamp(1rem, .94rem + .3vw, 1.15rem);
+      color: rgba(255, 255, 255, .84);
+    }
+
+    .checks {
+      list-style: none;
+      margin: 24px 0 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 22px;
+    }
+    .checks li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .875rem;
+      font-weight: 600;
+    }
+    .tick {
+      width: 20px; height: 20px;
+      flex: none;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(110, 205, 207, .18);
+      color: var(--teal-300);
+    }
+
+    .proof {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      max-width: 34em;
+      margin-top: 28px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid rgba(255, 255, 255, .13);
+      -webkit-backdrop-filter: blur(6px);
+              backdrop-filter: blur(6px);
+    }
+    .proof__icon {
+      flex: none;
+      width: 42px; height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 11px;
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-300) 100%);
+      color: var(--navy-950);
+    }
+    .proof p { margin: 0; font-size: .875rem; color: rgba(255, 255, 255, .84); }
+    .proof strong { color: #fff; }
+
+    .hero__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 24px;
+      color: #fff;
+      font-weight: 700;
+      font-size: .95rem;
+      text-decoration: none;
+      border-bottom: 2px solid var(--red);
+      padding-bottom: 2px;
+    }
+    .hero__cta svg { transition: transform .2s; }
+    .hero__cta:hover svg { transform: translateY(2px); }
+    @media (min-width: 1024px) { .hero__cta { display: none; } }
+
+    /* ---------- Form card ---------- */
+    .form-col { position: relative; z-index: 3; scroll-margin-top: 16px; }
+    @media (min-width: 1024px) { .form-col { padding-top: 40px; } }
+
+    .card {
+      position: relative;
+      overflow: hidden;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: var(--shadow-card);
+    }
+    .card::before {
+      content: "";
+      display: block;
+      height: 5px;
+      background: linear-gradient(90deg, var(--teal) 0%, var(--teal-300) 100%);
+    }
+    .card__inner { padding: 24px 20px 26px; }
+    @media (min-width: 480px) { .card__inner { padding: 30px 32px 32px; } }
+
+    .card h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -.015em;
+      color: var(--navy);
+    }
+    .card__sub { margin: 6px 0 0; color: var(--muted); font-size: .9375rem; text-wrap: pretty; }
+
+    .step { margin: 26px 0 0; padding: 0; border: 0; min-width: 0; }
+    .step legend {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--navy);
+    }
+    .step__num {
+      flex: none;
+      width: 26px; height: 26px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--navy);
+      color: #fff;
+      font-size: .8125rem;
+      font-weight: 700;
+    }
+    .step__hint { margin: 4px 0 14px 36px; font-size: .8125rem; color: var(--muted); }
+
+    /* Topic picker (single choice) */
+    .topics-wrap { container-type: inline-size; }
+    .topics { display: grid; gap: 10px; }
+
+    .topic {
+      position: relative;
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      column-gap: 14px;
+      align-items: center;
+      padding: 14px 44px 14px 14px;
+      border: 1.5px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      cursor: pointer;
+      transition: border-color .18s, box-shadow .18s, background-color .18s, transform .18s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .topic input { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
+    .topic:hover { border-color: var(--teal-300); transform: translateY(-1px); }
+    .topic__icon {
+      width: 44px; height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: var(--teal-50);
+      color: var(--teal-700);
+      transition: background-color .18s, color .18s;
+    }
+    .topic__title { display: block; font-size: .9375rem; font-weight: 700; color: var(--navy); line-height: 1.3; }
+    .topic__desc { display: block; margin-top: 2px; font-size: .8125rem; line-height: 1.45; color: var(--muted); }
+    .topic__check {
+      position: absolute;
+      top: 50%;
+      right: 14px;
+      width: 22px; height: 22px;
+      margin-top: -11px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      border: 1.5px solid var(--line-strong);
+      background: #fff;
+      color: #fff;
+      transition: background-color .18s, border-color .18s;
+    }
+    .topic__check svg { transform: scale(.4); opacity: 0; transition: transform .2s cubic-bezier(.3, 1.6, .5, 1), opacity .15s; }
+
+    .topic.is-selected {
+      border-color: var(--teal);
+      background: #F2FAFA;
+      box-shadow: 0 0 0 3px rgba(0, 149, 156, .14);
+    }
+    .topic.is-selected .topic__icon { background: var(--teal); color: #fff; }
+    .topic.is-selected .topic__check { background: var(--teal); border-color: var(--teal); }
+    .topic.is-selected .topic__check svg { transform: scale(1); opacity: 1; }
+    .topic:focus-within { outline: 2px solid var(--navy); outline-offset: 2px; }
+    @supports selector(:has(*)) {
+      .topic:focus-within { outline: none; }
+      .topic:has(input:focus-visible) { outline: 2px solid var(--navy); outline-offset: 2px; }
+    }
+    .topics.has-error .topic { border-color: #E8A3AE; }
+
+    @container (min-width: 400px) {
+      .topics { grid-template-columns: 1fr 1fr; }
+      .topic {
+        grid-template-columns: 1fr;
+        align-items: start;
+        row-gap: 12px;
+        padding: 16px;
+      }
+      .topic__check { top: 16px; right: 16px; margin-top: 0; }
+    }
+
+    /* Fields */
+    .fields-wrap { container-type: inline-size; }
+    .fields { display: grid; gap: 14px; }
+    @container (min-width: 400px) {
+      .fields { grid-template-columns: 1fr 1fr; }
+      .field--full { grid-column: 1 / -1; }
+    }
+    .field label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: .8125rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .field .opt { font-weight: 500; color: var(--muted); }
+    .input {
+      width: 100%;
+      height: 50px;
+      padding: 0 14px;
+      border: 1.5px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 16px;
+      transition: border-color .15s, box-shadow .15s;
+      -webkit-appearance: none;
+              appearance: none;
+    }
+    .input::placeholder { color: #98A7B6; }
+    .input:hover { border-color: var(--line-strong); }
+    .input:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 4px rgba(0, 149, 156, .16); }
+    .field.has-error .input { border-color: var(--red-text); box-shadow: 0 0 0 4px rgba(200, 16, 46, .08); }
+
+    .error {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin: 6px 0 0;
+      font-size: .78rem;
+      font-weight: 600;
+      color: var(--red-text);
+    }
+    .error:empty { display: none; }
+    .error::before {
+      content: "!";
+      flex: none;
+      width: 15px; height: 15px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--red-text);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 800;
+    }
+    .step > .error { margin: 10px 0 0; }
+
+    /* Consent */
+    .consent {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-top: 22px;
+      font-size: .8125rem;
+      line-height: 1.5;
+      color: var(--muted);
+      cursor: pointer;
+    }
+    .consent input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+    .consent__box {
+      flex: none;
+      width: 22px; height: 22px;
+      margin-top: 1px;
+      display: grid;
+      place-items: center;
+      border: 1.5px solid var(--line-strong);
+      border-radius: 6px;
+      background: #fff;
+      color: #fff;
+      transition: background-color .15s, border-color .15s;
+    }
+    .consent__box svg { transform: scale(.4); opacity: 0; transition: transform .2s cubic-bezier(.3, 1.6, .5, 1), opacity .15s; }
+    .consent input:checked + .consent__box { background: var(--teal); border-color: var(--teal); }
+    .consent input:checked + .consent__box svg { transform: scale(1); opacity: 1; }
+    .consent input:focus-visible + .consent__box { box-shadow: 0 0 0 4px rgba(0, 149, 156, .22); }
+    .consent.has-error .consent__box { border-color: var(--red-text); }
+    .consent a { color: var(--teal-700); font-weight: 600; text-underline-offset: 2px; }
+
+    /* Submit */
+    .btn-submit {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      min-height: 58px;
+      margin-top: 22px;
+      padding: 0 20px;
+      border: 0;
+      border-radius: 12px;
+      background: var(--red);
+      color: #fff;
+      font-size: 1.1875rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 14px 26px -12px rgba(255, 24, 58, .7);
+      transition: background-color .15s, transform .15s, box-shadow .15s;
+    }
+    .btn-submit:hover { background: var(--red-hover); transform: translateY(-1px); box-shadow: 0 18px 30px -12px rgba(255, 24, 58, .75); }
+    .btn-submit:active { transform: translateY(0); }
+    .btn-submit:focus-visible { outline: 3px solid var(--navy); outline-offset: 3px; }
+    .btn-submit svg { transition: transform .2s; }
+    .btn-submit:hover svg { transform: translateX(3px); }
+    .btn-submit .spinner { display: none; }
+    .btn-submit[aria-busy="true"] { pointer-events: none; background: var(--red-hover); }
+    .btn-submit[aria-busy="true"] .btn-label,
+    .btn-submit[aria-busy="true"] .btn-arrow { visibility: hidden; }
+    .btn-submit[aria-busy="true"] .spinner { display: block; position: absolute; }
+    .spinner {
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      border: 3px solid rgba(255, 255, 255, .35);
+      border-top-color: #fff;
+      animation: spin .7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .fineprint {
+      margin: 14px 0 0;
+      font-size: .75rem;
+      color: var(--muted);
+      text-align: center;
+    }
+    .fineprint svg { display: inline-block; margin: -2px 6px 0 0; vertical-align: middle; color: var(--teal-700); }
+
+    .form-alert {
+      margin: 16px 0 0;
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: #FDEEF0;
+      border: 1px solid #F5C2CA;
+      color: var(--red-text);
+      font-size: .8125rem;
+      font-weight: 600;
+    }
+    .form-alert a { color: inherit; }
+
+    .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+    /* Success */
+    .success { padding: 40px 24px 36px; text-align: center; }
+    @media (min-width: 480px) { .success { padding: 52px 40px 44px; } }
+    .success__badge {
+      width: 76px; height: 76px;
+      margin: 0 auto 22px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--teal);
+      color: #fff;
+      box-shadow: 0 0 0 10px var(--teal-50);
+      animation: pop .5s cubic-bezier(.3, 1.6, .5, 1) both;
+    }
+    .success__badge path { stroke-dasharray: 30; stroke-dashoffset: 30; animation: draw .45s .25s ease-out forwards; }
+    @keyframes pop  { from { transform: scale(.4); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+    .success h2:focus { outline: none; }
+    .success p { margin: 12px auto 0; max-width: 26em; color: var(--muted); }
+    .success strong { color: var(--navy); }
+    .success__chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 22px;
+      padding: 8px 14px 8px 8px;
+      border-radius: 999px;
+      background: var(--teal-50);
+      color: var(--teal-700);
+      font-size: .8125rem;
+      font-weight: 700;
+    }
+    .success__chip > span:first-child {
+      width: 28px; height: 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--teal);
+      color: #fff;
+    }
+    .success__actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+    }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 16px;
+      border-radius: 10px;
+      border: 1.5px solid var(--line);
+      color: var(--navy);
+      font-size: .875rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: border-color .15s, background-color .15s;
+    }
+    .btn-ghost:hover { border-color: var(--navy); background: var(--surface); }
+
+    /* ---------- Details ---------- */
+    .details { padding: 56px 0 0; }
+    @media (min-width: 1024px) { .details { padding: 64px 0 0; } }
+
+    .kicker {
+      margin: 0;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--teal-700);
+    }
+    .details h2,
+    .why h2 {
+      margin: 8px 0 28px;
+      font-size: clamp(1.5rem, 1.25rem + 1vw, 2rem);
+      line-height: 1.2;
+      letter-spacing: -.02em;
+      color: var(--navy);
+      text-wrap: balance;
+    }
+
+    .steps { list-style: none; margin: 0; padding: 0; counter-reset: step; }
+    .steps li {
+      position: relative;
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      column-gap: 18px;
+      padding-bottom: 28px;
+    }
+    .steps li:last-child { padding-bottom: 0; }
+    .steps li::before {
+      counter-increment: step;
+      content: counter(step, decimal-leading-zero);
+      width: 48px; height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: #fff;
+      border: 1.5px solid var(--line);
+      color: var(--navy);
+      font-size: .9375rem;
+      font-weight: 800;
+      box-shadow: 0 6px 14px -8px rgba(0, 26, 51, .25);
+    }
+    .steps li:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      left: 23px;
+      top: 56px;
+      bottom: 8px;
+      width: 2px;
+      border-radius: 2px;
+      background: linear-gradient(var(--teal-300), rgba(110, 205, 207, .15));
+    }
+    .steps h3 { margin: 11px 0 4px; font-size: 1.0625rem; line-height: 1.3; color: var(--navy); }
+    .steps p { margin: 0; font-size: .9375rem; color: var(--muted); }
+
+    .why { padding: 64px 0 72px; }
+    @media (min-width: 1024px) { .why { padding: 96px 0 104px; } }
+    .why__grid { display: grid; gap: 12px; }
+    @media (min-width: 720px) { .why__grid { grid-template-columns: repeat(3, 1fr); gap: 16px; } }
+    .why__item {
+      padding: 24px 22px;
+      border-radius: 16px;
+      background: #fff;
+      border: 1px solid var(--line);
+    }
+    .why__icon {
+      width: 42px; height: 42px;
+      margin-bottom: 14px;
+      display: grid;
+      place-items: center;
+      border-radius: 11px;
+      background: var(--teal-50);
+      color: var(--teal-700);
+    }
+    .why__item:first-child .why__icon { background: #FFE8EC; color: var(--red-text); }
+    .why__item h3 { margin: 0 0 6px; font-size: 1rem; line-height: 1.3; color: var(--navy); }
+    .why__item p { margin: 0; font-size: .875rem; color: var(--muted); }
+
+    /* ---------- Footer ---------- */
+    .site-footer { background: var(--navy-950); color: rgba(255, 255, 255, .7); font-size: .875rem; }
+    .footer__inner {
+      max-width: 1248px;
+      margin: 0 auto;
+      padding: 44px 16px 28px;
+    }
+    @media (min-width: 1024px) { .footer__inner { padding: 56px 32px 32px; } }
+    .footer__top { display: grid; gap: 28px; }
+    @media (min-width: 768px) {
+      .footer__top { grid-template-columns: 1.4fr 1fr auto; align-items: start; gap: 40px; }
+    }
+    .footer__brand img { height: 28px; width: auto; }
+    .footer__brand p { margin: 14px 0 0; max-width: 26em; }
+    .footer__label {
+      margin: 0 0 8px;
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--teal-300);
+    }
+    .footer__contact p { margin: 0 0 4px; }
+    .footer a { color: #fff; text-decoration: none; }
+    .footer a:hover { text-decoration: underline; text-underline-offset: 3px; }
+    .social {
+      width: 42px; height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 11px;
+      border: 1px solid rgba(255, 255, 255, .18);
+      transition: background-color .15s, border-color .15s;
+    }
+    .footer a.social:hover { background: rgba(255, 255, 255, .08); border-color: rgba(255, 255, 255, .35); }
+    .footer__bottom {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px 24px;
+      margin-top: 36px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, .1);
+      font-size: .78rem;
+      color: rgba(255, 255, 255, .55);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+      .pulse, .live-dot::after { display: none; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <div class="layout">
+
+    <!-- Navy band behind header + hero -->
+    <div class="band" aria-hidden="true">
+      <svg class="band__net" viewBox="0 0 640 420" fill="none">
+        <path stroke="#6ECDCF" stroke-opacity=".4" d="M60 330 150 250 250 300 320 180 420 240 480 120 580 190M150 250 220 130 320 180M220 130 360 70 480 120 560 50M420 240 500 330 580 190M250 300 330 380 500 330M360 70 320 180M580 190 630 300 500 330"/>
+        <g fill="#6ECDCF">
+          <circle cx="60" cy="330" r="3" opacity=".6"/>
+          <circle cx="150" cy="250" r="4"/>
+          <circle cx="250" cy="300" r="3" opacity=".7"/>
+          <circle cx="320" cy="180" r="5.5"/>
+          <circle cx="420" cy="240" r="3.5"/>
+          <circle cx="580" cy="190" r="3.5"/>
+          <circle cx="220" cy="130" r="3"/>
+          <circle cx="360" cy="70" r="3.5" opacity=".8"/>
+          <circle cx="560" cy="50" r="3" opacity=".6"/>
+          <circle cx="500" cy="330" r="4"/>
+          <circle cx="330" cy="380" r="2.5" opacity=".6"/>
+          <circle cx="630" cy="300" r="2.5" opacity=".6"/>
+        </g>
+        <circle class="pulse" cx="320" cy="180" r="12" stroke="#6ECDCF"/>
+        <circle cx="480" cy="120" r="4.5" fill="#FF183A"/>
+        <circle class="pulse pulse--late" cx="480" cy="120" r="10" stroke="#FF183A"/>
+      </svg>
+    </div>
+
+    <header class="site-header">
+      <a class="logo" href="https://goat-data.com/" aria-label="GOAT DATA home">
+        <img src="assets/goat-logo-white.png" alt="Goat" width="376" height="82">
+      </a>
+      <span class="partner">Stibo Systems Partner</span>
+    </header>
+
+    <section class="hero" aria-labelledby="hero-title">
+      <span class="eyebrow"><span class="live-dot" aria-hidden="true"></span>Free for Stibo Connect attendees</span>
+
+      <h1 id="hero-title">STEP Impact <span class="accent">+ AI Readiness</span> Assessment</h1>
+
+      <p class="lead">A free diagnostic of how you're using STEP today: your master data model, your potential to apply AI, and where your roadmap should go next to capture more ROI.</p>
+
+      <ul class="checks">
+        <li><span class="tick" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>No cost</li>
+        <li><span class="tick" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>No commitment</li>
+        <li><span class="tick" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Led by STEP specialists</li>
+      </ul>
+
+      <div class="proof">
+        <span class="proof__icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M8.5 14 7 22l5-3 5 3-1.5-8"/></svg>
+        </span>
+        <p><strong>Proven on STEP.</strong> From the same team behind Kimberly-Clark's STEP success story.</p>
+      </div>
+
+      <a class="hero__cta" href="#assessment">
+        Choose your focus area
+        <svg class="btn-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+      </a>
+    </section>
+
+    <!-- Form -->
+    <div class="form-col" id="assessment">
+      <div class="card">
+        <form class="card__inner" id="assessment-form" novalidate>
+          <h2>Get your free assessment</h2>
+          <p class="card__sub">Choose one focus area and we'll reach out to schedule it.</p>
+
+          <fieldset class="step">
+            <legend><span class="step__num" aria-hidden="true">1</span>Choose your focus area</legend>
+            <p class="step__hint" id="topic-hint">Pick one. We'll tailor the session around it.</p>
+
+            <div class="topics-wrap">
+              <div class="topics" role="radiogroup" aria-describedby="topic-hint topic-error">
+                <label class="topic">
+                  <input type="radio" name="topic" value="master-data" required>
+                  <span class="topic__icon" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="8" ry="3"/><path d="M4 5.5v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/><path d="M4 11.5v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/></svg>
+                  </span>
+                  <span>
+                    <span class="topic__title">Master Data</span>
+                    <span class="topic__desc">Governance and scalability of your current model</span>
+                  </span>
+                  <span class="topic__check" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+                </label>
+
+                <label class="topic">
+                  <input type="radio" name="topic" value="applied-ai">
+                  <span class="topic__icon" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3.5l1.7 4.8 4.8 1.7-4.8 1.7L10 16.5l-1.7-4.8L3.5 10l4.8-1.7z"/><path d="M18 13.5l.9 2.6 2.6.9-2.6.9-.9 2.6-.9-2.6-2.6-.9 2.6-.9z"/></svg>
+                  </span>
+                  <span>
+                    <span class="topic__title">Applied AI</span>
+                    <span class="topic__desc">What AI solutions could power your STEP operation</span>
+                  </span>
+                  <span class="topic__check" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+                </label>
+
+                <label class="topic">
+                  <input type="radio" name="topic" value="roadmap">
+                  <span class="topic__icon" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="19" r="2"/><path d="M7 19h9.5a3.5 3.5 0 0 0 0-7h-9a3.5 3.5 0 0 1 0-7H13"/><path d="M17 9V2.5l4 2-4 2"/></svg>
+                  </span>
+                  <span>
+                    <span class="topic__title">Roadmap</span>
+                    <span class="topic__desc">Prioritized next steps to evolve your platform</span>
+                  </span>
+                  <span class="topic__check" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+                </label>
+
+                <label class="topic">
+                  <input type="radio" name="topic" value="roi">
+                  <span class="topic__icon" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14.5 7H21v6.5"/></svg>
+                  </span>
+                  <span>
+                    <span class="topic__title">ROI</span>
+                    <span class="topic__desc">Where the value you're not capturing yet is hiding</span>
+                  </span>
+                  <span class="topic__check" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+                </label>
+              </div>
+            </div>
+            <p class="error" id="topic-error" aria-live="polite"></p>
+          </fieldset>
+
+          <fieldset class="step">
+            <legend><span class="step__num" aria-hidden="true">2</span>Tell us about you</legend>
+            <p class="step__hint">Takes less than a minute.</p>
+
+            <div class="fields-wrap">
+              <div class="fields">
+                <div class="field field--full">
+                  <label for="fullName">Full name</label>
+                  <input class="input" id="fullName" name="fullName" type="text" autocomplete="name" placeholder="Jane Doe" required aria-describedby="fullName-error">
+                  <p class="error" id="fullName-error" aria-live="polite"></p>
+                </div>
+                <div class="field field--full">
+                  <label for="email">Work email</label>
+                  <input class="input" id="email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="jane@company.com" required aria-describedby="email-error">
+                  <p class="error" id="email-error" aria-live="polite"></p>
+                </div>
+                <div class="field">
+                  <label for="company">Company</label>
+                  <input class="input" id="company" name="company" type="text" autocomplete="organization" placeholder="Your company" required aria-describedby="company-error">
+                  <p class="error" id="company-error" aria-live="polite"></p>
+                </div>
+                <div class="field">
+                  <label for="jobTitle">Job title</label>
+                  <input class="input" id="jobTitle" name="jobTitle" type="text" autocomplete="organization-title" placeholder="Your role" required aria-describedby="jobTitle-error">
+                  <p class="error" id="jobTitle-error" aria-live="polite"></p>
+                </div>
+                <div class="field field--full">
+                  <label for="phone">Phone <span class="opt">(optional)</span></label>
+                  <input class="input" id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+1 000 000 0000" aria-describedby="phone-error">
+                  <p class="error" id="phone-error" aria-live="polite"></p>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Honeypot: humans never see or fill this -->
+          <div class="hp" aria-hidden="true">
+            <label for="website">Website</label>
+            <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+          </div>
+
+          <label class="consent" id="consent-field">
+            <input type="checkbox" id="consent" name="consent" required aria-describedby="consent-error">
+            <span class="consent__box" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+            <span>I agree to be contacted by Goat about this assessment and accept the <a href="#" id="privacy-link" target="_blank" rel="noopener">privacy policy</a>.</span>
+          </label>
+          <p class="error" id="consent-error" aria-live="polite"></p>
+
+          <button class="btn-submit" type="submit">
+            <span class="btn-label">Request my assessment</span>
+            <svg class="btn-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            <span class="spinner" aria-hidden="true"></span>
+          </button>
+
+          <p class="form-alert" id="form-alert" role="alert" hidden></p>
+
+          <p class="fineprint">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg>
+            We'll only use your details to coordinate your assessment.
+          </p>
+        </form>
+
+        <div class="success" id="success" hidden>
+          <div class="success__badge" aria-hidden="true">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+          </div>
+          <h2 id="success-title" tabindex="-1">You're all set<span data-first-name></span>!</h2>
+          <p>Thanks for requesting your assessment. Our team will reach out at <strong data-email></strong> to schedule your session.</p>
+          <div class="success__chip">
+            <span aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+            <span>Focus area: <span data-topic></span></span>
+          </div>
+          <div class="success__actions">
+            <a class="btn-ghost" href="https://goat-data.com/" target="_blank" rel="noopener">Explore goat-data.com</a>
+            <a class="btn-ghost" href="https://www.linkedin.com/company/goat-data/" target="_blank" rel="noopener">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+              Follow us
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Supporting content -->
+    <div class="details">
+      <section aria-labelledby="how-title">
+        <p class="kicker">How it works</p>
+        <h2 id="how-title">From one conversation to a clear plan</h2>
+        <ol class="steps">
+          <li>
+            <div>
+              <h3>Pick your focus</h3>
+              <p>Choose the one area where you want the sharpest insight: master data, AI, roadmap or ROI.</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <h3>Meet our STEP team</h3>
+              <p>We'll schedule a working session to understand how you use STEP today and where it's holding you back.</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <h3>Get clear next steps</h3>
+              <p>Walk away with practical, prioritized recommendations you can act on right away.</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+    </div>
+
+    <section class="why" aria-labelledby="why-title">
+      <p class="kicker">Why Goat</p>
+      <h2 id="why-title">Where complexity meets simplicity and results</h2>
+      <div class="why__grid">
+        <article class="why__item">
+          <div class="why__icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg>
+          </div>
+          <h3>The Milla Extra Mindset</h3>
+          <p>We go beyond expectations. Always. We embrace challenges and deliver results that truly make a difference.</p>
+        </article>
+        <article class="why__item">
+          <div class="why__icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7"/><path d="M18 14.2a6.5 6.5 0 0 1 3.5 5.8"/></svg>
+          </div>
+          <h3>Trusted Partnership</h3>
+          <p>We become an extension of your team, earning trust through transparency, commitment, and consistent delivery.</p>
+        </article>
+        <article class="why__item">
+          <div class="why__icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M8.5 7V5.5a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2V7"/><path d="M3 13h18"/></svg>
+          </div>
+          <h3>Business-First Thinking</h3>
+          <p>Technology is just a tool. Real success comes from connecting data, technology, and business objectives.</p>
+        </article>
+      </div>
+    </section>
+
+  </div>
+
+  <footer class="site-footer footer">
+    <div class="footer__inner">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <img src="assets/goat-logo-white.png" alt="Goat" width="376" height="82">
+          <p>We connect data, technology, and business goals to solve real-world challenges with simple, human-centered solutions.</p>
+        </div>
+        <div class="footer__contact">
+          <p class="footer__label">Contact</p>
+          <p><a href="mailto:info@goat-data.com">info@goat-data.com</a></p>
+          <p>1010 S Federal Hwy, Suite 1400<br>Hallandale Beach, FL 33009, USA</p>
+        </div>
+        <div>
+          <p class="footer__label">Follow</p>
+          <a class="social" href="https://www.linkedin.com/company/goat-data/" target="_blank" rel="noopener" aria-label="GOAT DATA on LinkedIn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© <span id="year">2026</span> GOAT DATA. All rights reserved.</span>
+        <span><a href="https://goat-data.com/" target="_blank" rel="noopener">goat-data.com</a> · <a href="#" class="privacy-url" target="_blank" rel="noopener">Privacy policy</a></span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+(() => {
+  /* ================= CONFIG =================
+     endpoint:   Google Apps Script web app URL (ends in /exec). See
+                 LEEME-formulario.md. Leave empty for demo mode (the payload
+                 is logged to the console and success is shown).
+     privacyUrl: Goat's privacy policy page.
+  */
+  const CONFIG = {
+    endpoint: '', // 'https://script.google.com/a/macros/khaoscore.co/s/AKfycbyVNAoTM9mOOHVtqsXuiTOxXR1VsQ9BRNEWsFvJyv80ql7JTQHdh8vjiJuYmaV0jO-E9g/exec'
+    privacyUrl: 'https://goat-data.com/',
+    source: 'stibo-connect-assessment',
+  };
+
+  const TOPICS = {
+    'master-data': 'Master Data',
+    'applied-ai': 'Applied AI',
+    'roadmap': 'Roadmap',
+    'roi': 'ROI',
+  };
+  // Short aliases accepted in ?topic= (handy for per-topic QR codes)
+  const TOPIC_ALIASES = { master: 'master-data', data: 'master-data', mdm: 'master-data', ai: 'applied-ai' };
+
+  const form = document.getElementById('assessment-form');
+  const success = document.getElementById('success');
+  const submitBtn = form.querySelector('.btn-submit');
+  const alertBox = document.getElementById('form-alert');
+  const topicsBox = form.querySelector('.topics');
+  const topicInputs = [...form.querySelectorAll('input[name="topic"]')];
+  const params = new URLSearchParams(location.search);
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+  document.querySelectorAll('#privacy-link, .privacy-url').forEach(a => { a.href = CONFIG.privacyUrl; });
+
+  /* ---------- Topic picker ---------- */
+  const syncTopics = () => {
+    topicInputs.forEach(input => input.closest('.topic').classList.toggle('is-selected', input.checked));
+  };
+  topicInputs.forEach(input => input.addEventListener('change', () => {
+    syncTopics();
+    setError('topic', '');
+  }));
+
+  const presetRaw = (params.get('topic') || '').toLowerCase().trim();
+  const preset = TOPIC_ALIASES[presetRaw] || presetRaw;
+  const presetInput = topicInputs.find(i => i.value === preset);
+  if (presetInput) presetInput.checked = true;
+  syncTopics();
+
+  /* ---------- Validation ---------- */
+  const rules = {
+    fullName: v => v.trim().length >= 2 || 'Please enter your full name.',
+    email: v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) || 'Please enter a valid work email.',
+    company: v => v.trim() !== '' || 'Please enter your company.',
+    jobTitle: v => v.trim() !== '' || 'Please enter your job title.',
+    phone: v => v.trim() === '' || /^\+?[\d\s().-]{7,20}$/.test(v.trim()) || 'Please enter a valid phone number.',
+  };
+
+  function setError(name, message) {
+    const errorEl = document.getElementById(`${name}-error`);
+    if (errorEl) errorEl.textContent = message;
+
+    if (name === 'topic') {
+      topicsBox.classList.toggle('has-error', !!message);
+    } else if (name === 'consent') {
+      document.getElementById('consent-field').classList.toggle('has-error', !!message);
+    } else {
+      const input = form.elements[name];
+      input.closest('.field').classList.toggle('has-error', !!message);
+      input.setAttribute('aria-invalid', message ? 'true' : 'false');
+    }
+  }
+
+  function checkField(name) {
+    const result = rules[name](form.elements[name].value);
+    setError(name, result === true ? '' : result);
+    return result === true;
+  }
+
+  Object.keys(rules).forEach(name => {
+    const input = form.elements[name];
+    input.addEventListener('blur', () => {
+      if (input.value.trim() !== '' || input.dataset.touched) checkField(name);
+      input.dataset.touched = '1';
+    });
+    input.addEventListener('input', () => {
+      if (input.closest('.field').classList.contains('has-error')) checkField(name);
+    });
+  });
+
+  form.elements.consent.addEventListener('change', e => {
+    if (e.target.checked) setError('consent', '');
+  });
+
+  function validateAll() {
+    const invalid = [];
+
+    if (!topicInputs.some(i => i.checked)) {
+      setError('topic', 'Please choose one focus area.');
+      invalid.push(topicInputs[0]);
+    }
+    Object.keys(rules).forEach(name => {
+      if (!checkField(name)) invalid.push(form.elements[name]);
+    });
+    if (!form.elements.consent.checked) {
+      setError('consent', 'Please accept to be contacted so we can schedule your assessment.');
+      invalid.push(form.elements.consent);
+    }
+    return invalid;
+  }
+
+  /* ---------- Submit ---------- */
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    alertBox.hidden = true;
+
+    const invalid = validateAll();
+    if (invalid.length) {
+      const first = invalid[0];
+      const target = first.name === 'topic' ? topicsBox : first.closest('.field, .consent') || first;
+      target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      first.focus({ preventScroll: true });
+      return;
+    }
+
+    const data = new FormData(form);
+    const topic = data.get('topic');
+    const payload = {
+      topic,
+      topicLabel: TOPICS[topic],
+      fullName: data.get('fullName').trim(),
+      email: data.get('email').trim(),
+      company: data.get('company').trim(),
+      jobTitle: data.get('jobTitle').trim(),
+      phone: data.get('phone').trim(),
+      consent: true,
+      source: CONFIG.source,
+      pageUrl: location.href,
+      referrer: document.referrer,
+      submittedAt: new Date().toISOString(),
+    };
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach(key => {
+      if (params.get(key)) payload[key] = params.get(key);
+    });
+
+    submitBtn.setAttribute('aria-busy', 'true');
+    submitBtn.disabled = true;
+
+    try {
+      if (data.get('website')) {
+        await sleep(600); // bot filled the honeypot: pretend it worked
+      } else if (CONFIG.endpoint) {
+        // text/plain keeps this a "simple" CORS request: Apps Script can't answer preflights.
+        const res = await fetch(CONFIG.endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload),
+        });
+        // A misconfigured deployment answers 200 with an HTML login page, so require { ok: true }.
+        const result = await res.json().catch(() => null);
+        if (!result || result.ok !== true) throw new Error(result?.error || `HTTP ${res.status}`);
+      } else {
+        console.info('[demo mode] Lead payload:', payload);
+        await sleep(900);
+      }
+      showSuccess(payload);
+    } catch (err) {
+      console.error(err);
+      alertBox.innerHTML = 'Something went wrong sending your request. Please try again or write to us at <a href="mailto:info@goat-data.com">info@goat-data.com</a>.';
+      alertBox.hidden = false;
+    } finally {
+      submitBtn.removeAttribute('aria-busy');
+      submitBtn.disabled = false;
+    }
+  });
+
+  function showSuccess(payload) {
+    const firstName = payload.fullName.split(/\s+/)[0];
+    success.querySelector('[data-first-name]').textContent = firstName ? `, ${firstName}` : '';
+    success.querySelector('[data-email]').textContent = payload.email;
+    success.querySelector('[data-topic]').textContent = payload.topicLabel;
+
+    form.hidden = true;
+    success.hidden = false;
+
+    const card = success.closest('.form-col');
+    if (card.getBoundingClientRect().top < 0) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.getElementById('success-title').focus({ preventScroll: true });
+  }
+})();
+</script>
+</body>
+</html>
